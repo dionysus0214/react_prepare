@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Head from 'next/head';
 import {Form, Input, Checkbox, Button} from 'antd';
 import styled from 'styled-components';
+import {useDispatch} from 'react-redux';
 
 import AppLayout from "../components/AppLayout";
 import useInput from '../hooks/useInput';
@@ -11,6 +12,7 @@ const ErrorMessage = styled.div`
 `;
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const [id, onChangeId] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, onChangePassword] = useInput('');
