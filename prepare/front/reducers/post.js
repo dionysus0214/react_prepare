@@ -14,7 +14,12 @@ export const initialState = {
         nickname: '오르페우스',
       },
       content: '얼른 사고싶어요~'
-    }],
+    }, {
+      User: {
+        nickname: '헤라',
+      },
+      content: '언제부터 살 수 있나요!'
+    }]
   }],
   imagePaths: [],
   postAdded: false,
