@@ -8,6 +8,10 @@ export const initialState = {
     content: '첫 번째 게시글 #해시태그',
     Images: [{
       src: 'https://gimg.gilbut.co.kr/book/BN001958/rn_view_BN001958.jpg',
+    }, {
+      src: 'https://gimg.gilbut.co.kr/book/BN001998/rn_view_BN001998.jpg',
+    }, {
+      src: 'https://gimg.gilbut.co.kr/book/BN001978/rn_view_BN001978.jpg',
     }],
     Comments: [{
       User: {

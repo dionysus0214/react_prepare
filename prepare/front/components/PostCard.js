@@ -65,7 +65,6 @@ const PostCard = ({post}) => {
                 />
               </li>
             )}
-            dataSource={post.Comment}
           />
         </div>)}
     </div>
