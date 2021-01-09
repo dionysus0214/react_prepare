@@ -41,7 +41,7 @@ const ImagesZoom = ({images, onClose}) => {
       </SlickWrapper>
     </Overlay>
   );
-}
+};
 
 ImagesZoom.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,

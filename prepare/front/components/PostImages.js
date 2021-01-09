@@ -20,7 +20,7 @@ const PostImages = ({images}) => {
         <img role="presentation" src={images[0].src} alt={images[0].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onCLose={onClose} />}
       </>
-    )
+    );
   }
   if(images.length === 2 ) {
     return (
@@ -29,7 +29,7 @@ const PostImages = ({images}) => {
         <img role="presentation" style={{width: '50%', display: 'inline-block'}} src={images[1].src} alt={images[1].src} onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onCLose={onClose} />}
       </>
-    )
+    );
   }
   return (
     <>
@@ -47,7 +47,7 @@ const PostImages = ({images}) => {
       </div>
       {showImagesZoom && <ImagesZoom images={images} onCLose={onClose} />}
     </>
-  )
+  );
 };
 
 PostImages.propTypes = {
