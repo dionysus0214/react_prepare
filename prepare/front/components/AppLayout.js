@@ -4,31 +4,16 @@ import Link from 'next/link';
 import {Menu, Input, Row, Col} from 'antd';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
-import {createGlobalStyle} from 'styled-components';
 
 import UserProfile from '../components/UserProfile';
 import LoginForm from '../components/LoginForm';
-import { GoldenFilled } from '@ant-design/icons';
-
-const Global = createGlobalStyle`
-  .ant-row {
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-  }
-  .ant-col:first-child {
-    padding-left : 0 !important;
-  }
-  .ant-col:last-child {
-    padding-right : 0 !important;
-  }
-`;
 
 const SearchInput = styled(Input.Search)`
   vertical-align : middle;
 `;
 
 const AppLayout = ({children}) => {
-  const {isLoggedIn} = useSelector((state) => state.user);
+  const {me} = useSelector((state) => state.user);
 
   return (
     <div>
@@ -49,7 +34,7 @@ const AppLayout = ({children}) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
+          {me ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
