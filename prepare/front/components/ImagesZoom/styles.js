@@ -5,6 +5,9 @@ export const Global = createGlobalStyle`
   .slick-slide {
     display: inline-block;
   }
+  .ant-card-cover {
+    transform: none !important;
+  }
 `;
 
 export const Overlay = styled.div`
@@ -67,14 +70,5 @@ export const Indicator = styled.div`
     text-align: center;
     color: white;
     font-size: 15px;
-  }
-`;
-
-export const Global = createGlobalStyle`
-  .slick-slide {
-    display: inline-block;
-  }
-  .ant-card-cover {
-    transform: none !important;
   }
 `;
