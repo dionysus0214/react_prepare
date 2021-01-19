@@ -1,4 +1,4 @@
-import {all, fork, takeLatest, put, delay} from 'redux-saga/effects';
+import {all, fork, takeLatest, put, delay, throttle} from 'redux-saga/effects';
 import axios from 'axios';
 import shortId from 'shortid';
 
@@ -7,6 +7,7 @@ import {
   ADD_COMMENT_FAILURE, ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS,
   ADD_POST_FAILURE, ADD_POST_REQUEST, ADD_POST_SUCCESS,
   REMOVE_POST_FAILURE, REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS,
+  generateDummyPost,
 } from '../reducers/post';
 import {ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
@@ -103,7 +104,7 @@ function* addComment(action) {
 }
 
 function* watchLoadPosts() {
-  yield takeLatest(LOAD_POSTS_REQUEST, loadPosts);
+  yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
 }
 
 function* watchAddPost() {
