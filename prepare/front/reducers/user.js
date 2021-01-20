@@ -1,6 +1,12 @@
 import produce from 'immer';
 
 export const initialState = {
+  followLoading: false,
+  followDone: false,
+  followError: null,
+  unfollowLoading: false,
+  unfollowDone: false,
+  unfollowError: null,
   logInLoading: false,
   logInDone: false,
   logInError: null,
@@ -76,7 +82,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case FOLLOW_SUCCESS:
       draft.followLoading = false;
-      draft.me.Followings.push({ id: action.data });
+      draft.me.Followings.push({id: action.data});
       draft.followDone = true;
       break;
     case FOLLOW_FAILURE:
