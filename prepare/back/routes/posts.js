@@ -14,15 +14,19 @@ router.get('/', async (req, res, next) => {
       ],
       include: [{
         model: User,
-        attribute: ['id', 'nickname'],
+        attributes: ['id', 'nickname'],
       }, {
         model: Image,
       }, {
         model: Comment,
         include: [{
           model: User,
-          attribute: ['id', 'nickname'],
+          attributes: ['id', 'nickname'],
         }]
+      }, {
+        model: User,
+        as: 'Likers',
+        attributes: ['id'],
       }],
     });
     res.status(200).json(posts);
