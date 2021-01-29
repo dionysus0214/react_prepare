@@ -22,6 +22,15 @@ export const initialState = {
   changeNicknameLoading: false,
   changeNicknameDone: false,
   changeNicknameError: null,
+  loadFollowingsLoading: false,
+  loadFollowingsDone: false,
+  loadFollowingsError: null,
+  loadFollowersLoading: false,
+  loadFollowersDone: false,
+  loadFollowersError: null,
+  removeFollowerLoading: false,
+  removeFollowerDone: false,
+  removeFollowerError: null,
   me: null,
   signUpData: {},
   loginData: {},
@@ -55,17 +64,20 @@ export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS'; 
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
+export const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST';
+export const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS';
+export const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE';
+
+export const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
+export const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
+export const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
+
+export const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST';
+export const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS';
+export const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE';
+
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
-
-const dummyUser = (data) => ({
-  ...data,
-  nickname: '디오니소스',
-  id: 1,
-  Posts: [{id: 1}],
-  Followings: [{nickname: '라이언'}, {nickname: '어피치'}, {nickname: '죠르디'}],
-  Followers: [{nickname: '라이언'}, {nickname: '어피치'}, {nickname: '죠르디'}],
-});
 
 export const loginRequestAction = (data) => {
   return {
@@ -82,6 +94,48 @@ export const logoutRequestAction = () => {
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch (action.type) {
+    case REMOVE_FOLLOWER_REQUEST:
+      draft.removeFollowerLoading = true;
+      draft.removeFollowerError = null;
+      draft.removeFollowerDone = false;
+      break;
+    case REMOVE_FOLLOWER_SUCCESS:
+      draft.removeFollowerLoading = false;
+      draft.me.Followers = draft.me.Followers.filter((v) => v.id !== action.data.UserId);
+      draft.removeFollowerDone = true;
+      break;
+    case REMOVE_FOLLOWER_FAILURE:
+      draft.removeFollowerLoading = false;
+      draft.removeFollowerError = action.error;
+      break;
+    case LOAD_FOLLOWINGS_REQUEST:
+      draft.loadFollowingsLoading = true;
+      draft.loadFollowingsError = null;
+      draft.loadFollowingsDone = false;
+      break;
+    case LOAD_FOLLOWINGS_SUCCESS:
+      draft.loadFollowingsLoading = false;
+      draft.me.Followings = action.data;
+      draft.loadFollowingsDone = true;
+      break;
+    case LOAD_FOLLOWINGS_FAILURE:
+      draft.loadFollowingsLoading = false;
+      draft.loadFollowingsError = action.error;
+      break;
+    case LOAD_FOLLOWERS_REQUEST:
+      draft.loadFollowersLoading = true;
+      draft.loadFollowersError = null;
+      draft.loadFollowersDone = false;
+      break;
+    case LOAD_FOLLOWERS_SUCCESS:
+      draft.loadFollowersLoading = false;
+      draft.me.Followers = action.data;
+      draft.loadFollowersDone = true;
+      break;
+    case LOAD_FOLLOWERS_FAILURE:
+      draft.loadFollowersLoading = false;
+      draft.loadFollowersError = action.error;
+      break;
     case LOAD_MY_INFO_REQUEST:
       draft.loadMyInfoLoading = true;
       draft.loadMyInfoError = null;
@@ -103,7 +157,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case FOLLOW_SUCCESS:
       draft.followLoading = false;
-      draft.me.Followings.push({id: action.data});
+      draft.me.Followings.push({id: action.data.UserId});
       draft.followDone = true;
       break;
     case FOLLOW_FAILURE:
@@ -117,7 +171,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case UNFOLLOW_SUCCESS:
       draft.unfollowLoading = false;
-      draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data);
+      draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data.UserId);
       draft.unfollowDone = true;
       break;
     case UNFOLLOW_FAILURE:
@@ -171,6 +225,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.changeNicknameDone = false;
       break;
     case CHANGE_NICKNAME_SUCCESS:
+      draft.me.nickname = action.data.nickname;
       draft.changeNicknameLoading = false;
       draft.changeNicknameDone = true;
       break;
