@@ -22,13 +22,13 @@ function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data);
     yield put({
-      type : LOG_IN_SUCCESS,
-      data : result.data,
+      type: LOG_IN_SUCCESS,
+      data: result.data,
     });
   } catch(err) {
     yield put({
-      type : LOG_IN_FAILURE,
-      error : err.response.data,
+      type: LOG_IN_FAILURE,
+      error: err.response.data,
     });
   }
 }
@@ -41,12 +41,12 @@ function* logOut() {
   try {
     yield call(logOutAPI);
     yield put({
-      type : LOG_OUT_SUCCESS,
+      type: LOG_OUT_SUCCESS,
     });
   } catch(err) {
     yield put({
-      type : LOG_OUT_FAILURE,
-      error : err.response.data,
+      type: LOG_OUT_FAILURE,
+      error: err.response.data,
     });
   }
 }
@@ -60,12 +60,12 @@ function* signUp(action) {
     const result = yield call(signUpAPI, action.data);
     console.log(result);
     yield put({
-      type : SIGN_UP_SUCCESS,
+      type: SIGN_UP_SUCCESS,
     });
   } catch(err) {
     yield put({
-      type : SIGN_UP_FAILURE,
-      error : err.response.data,
+      type: SIGN_UP_FAILURE,
+      error: err.response.data,
     });
   }
 }
