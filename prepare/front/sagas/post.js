@@ -24,7 +24,7 @@ function* retweet(action) {
       type: RETWEET_SUCCESS,
       data: result.data,
     });
-  } catch (err) {
+  } catch(err) {
     console.error(err);
     yield put({
       type: RETWEET_FAILURE,
@@ -64,7 +64,7 @@ function* likePost(action) {
       type: LIKE_POST_SUCCESS,
       data: result.data,
     });
-  } catch (err) {
+  } catch(err) {
     console.error(err);
     yield put({
       type: LIKE_POST_FAILURE,
@@ -84,7 +84,7 @@ function* unlikePost(action) {
       type: UNLIKE_POST_SUCCESS,
       data: result.data,
     });
-  } catch (err) {
+  } catch(err) {
     console.error(err);
     yield put({
       type: UNLIKE_POST_FAILURE,
@@ -99,12 +99,12 @@ function loadPostsAPI(lastId) {
 
 function* loadPosts(action) {
   try {
-    const result = yield call(loadPostsAPI, action.data);
+    const result = yield call(loadPostsAPI, action.lastId);
     yield put({
       type: LOAD_POSTS_SUCCESS,
       data: result.data,
     });
-  } catch (err) {
+  } catch(err) {
     yield put({
       type: LOAD_POSTS_FAILURE,
       error: err.response.data,
