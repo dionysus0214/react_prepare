@@ -34,7 +34,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'dionysus.com'],
+  origin: ['http://localhost:3000', 'dionysus.com', 'http://52.78.144.236'],
   credentials: true,
 }));
 app.use('/', express.static(path.join(__dirname, 'uploads')));
